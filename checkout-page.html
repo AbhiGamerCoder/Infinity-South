@@ -458,9 +458,9 @@
                     <li><a href="checkout-page.html" class="active">Checkout</a></li>
                     <li><a href="dosa-company-contact-us.html">Contact Us</a></li>
                     <li>
-                        <div class="cart-icon" onclick="window.location.href='checkout-page.html'">
+                        <a class="cart-icon" onclick="window.location.href='checkout-page.html'">
                             🛒
-                            <span class="cart-count" id="cartCount">0</span>
+                            <span class="cart-count" id="cartCount">0</span></a>
                         </div>
                     </li>
                 </ul>
@@ -588,7 +588,7 @@ let cart = [];
 
 // Constants for calculations
 const TAX_RATE = 0.09; // 9% tax
-const DELIVERY_FEE = 2.99;
+const DELIVERY_FEE = 199; // Changed from 2.99 to 199 rupees
 
 // Initialize the page
 function initPage() {
@@ -642,14 +642,14 @@ function renderCartItems() {
         itemElement.innerHTML = `
             <div class="item-details">
                 <div class="item-name">${item.name}</div>
-                <div class="item-price">$${item.price.toFixed(2)} each</div>
+                <div class="item-price">₹${item.price.toFixed(2)} each</div>
             </div>
             <div class="item-quantity">
                 <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
                 <span class="quantity-value">${item.quantity}</span>
                 <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
             </div>
-            <div class="item-total">$${itemTotal.toFixed(2)}</div>
+            <div class="item-total">₹${itemTotal.toFixed(2)}</div>
             <div class="remove-item" onclick="removeItem(${item.id})">×</div>
         `;
         
@@ -669,19 +669,19 @@ function renderCartSummary() {
     cartSummaryContainer.innerHTML = `
         <div class="summary-row">
             <div>Subtotal</div>
-            <div>$${subtotal.toFixed(2)}</div>
+            <div>₹${subtotal.toFixed(2)}</div>
         </div>
         <div class="summary-row">
             <div>Tax (${(TAX_RATE * 100).toFixed(0)}%)</div>
-            <div>$${tax.toFixed(2)}</div>
+            <div>₹${tax.toFixed(2)}</div>
         </div>
         <div class="summary-row">
             <div>Delivery Fee</div>
-            <div>$${DELIVERY_FEE.toFixed(2)}</div>
+            <div>₹${DELIVERY_FEE.toFixed(2)}</div>
         </div>
         <div class="summary-row total">
             <div>Total</div>
-            <div>$${total.toFixed(2)}</div>
+            <div>₹${total.toFixed(2)}</div>
         </div>
     `;
 }
@@ -810,26 +810,26 @@ function showOrderConfirmation(order) {
                 ${order.items.map(item => `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <div>${item.quantity} × ${item.name}</div>
-                        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div>₹${(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                 `).join('')}
                 
                 <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <div>Subtotal</div>
-                        <div>$${order.pricing.subtotal.toFixed(2)}</div>
+                        <div>₹${order.pricing.subtotal.toFixed(2)}</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <div>Tax</div>
-                        <div>$${order.pricing.tax.toFixed(2)}</div>
+                        <div>₹${order.pricing.tax.toFixed(2)}</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <div>Delivery Fee</div>
-                        <div>$${order.pricing.deliveryFee.toFixed(2)}</div>
+                        <div>₹${order.pricing.deliveryFee.toFixed(2)}</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 0.5rem;">
                         <div>Total</div>
-                        <div>$${order.pricing.total.toFixed(2)}</div>
+                        <div>₹${order.pricing.total.toFixed(2)}</div>
                     </div>
                 </div>
             </div>
